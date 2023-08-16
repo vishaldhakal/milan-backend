@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ContactMeListView, ContactMeCreateView, ContactMeDetailView, ContactMeUpdateView, ContactMeDeleteView, AboutMeListView, AboutMeCreateView, AboutMeDetailView, AboutMeUpdateView, AboutMeDeleteView, FindUsCreateView, FindUsListView, FindUsDetailView, FindUsUpdateView, FindUsDeleteView, ImageListView, ImageUpdateView, LogoImageListView, LogoImageUpdateView, VideosListView, VideosCreateView, VideosDetailView, VideosUpdateView, VideosDeleteView, PublishVideosListView,QuestionCreateView, QuestionListView, QuestionDetailView, QuestionUpdateView, QuestionDeleteView, AnswerCreateView, AnswerListView, AnswerDetailView, AnswerUpdateView, AnswerDeleteView, UserDetailListView
+from .views import ContactMeListView, ContactMeCreateView, ContactMeDetailView, ContactMeUpdateView, ContactMeDeleteView, AboutMeListView, AboutMeCreateView, AboutMeDetailView, AboutMeUpdateView, AboutMeDeleteView, FindUsCreateView, FindUsListView, FindUsDetailView, FindUsUpdateView, FindUsDeleteView, ImageListView, ImageUpdateView, LogoImageListView, LogoImageUpdateView, VideosListView, VideosCreateView, VideosDetailView, VideosUpdateView, VideosDeleteView, PublishVideosListView,QuestionCreateView, QuestionListView, QuestionDetailView, QuestionUpdateView, QuestionDeleteView, AnswerCreateView, AnswerListView, AnswerDetailView, AnswerUpdateView, AnswerDeleteView, UserDetailListView,SurveyListView,SurveyCreateView,SurveyDetailView,SurveyDeleteView,SurveyUpdateView,SurveyConfigCreateView,SurveyConfigDetailView,SurveyConfigListView,SurveyConfigUpdateView
 
 urlpatterns = [
     path('aboutus-list/', AboutMeListView.as_view()),
@@ -7,6 +7,18 @@ urlpatterns = [
     path('aboutus-detail/<int:pk>/', AboutMeDetailView.as_view()),
     path('aboutus-update/<int:pk>/', AboutMeUpdateView.as_view()),
     path('aboutus-delete/<int:pk>/', AboutMeDeleteView.as_view()),
+
+
+    path('survey-list/', SurveyListView.as_view()),
+    path('survey-create/', SurveyCreateView.as_view()),
+    path('survey-detail/<int:pk>/', SurveyDetailView.as_view()),
+    path('survey-update/<int:pk>/', SurveyUpdateView.as_view()),
+    path('survey-delete/<int:pk>/', SurveyDeleteView.as_view()),
+    
+    path('surveyconfig/', SurveyConfigListView.as_view()),
+    path('surveyconfig-create/', SurveyConfigCreateView.as_view()),
+    path('surveyconfig-detail/', SurveyConfigDetailView.as_view()),
+    path('surveyconfig-update/', SurveyConfigUpdateView.as_view()),
 
     path('contact-me-list/', ContactMeListView.as_view()),
     path('contact-me-create/', ContactMeCreateView.as_view()),

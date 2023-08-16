@@ -3,6 +3,7 @@ from ckeditor.fields import RichTextField
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 from authentication.models import User 
+from solo.models import SingletonModel
 
 class AboutMe(models.Model):
     content = RichTextField(config_name='awesome_ckeditor')
@@ -109,6 +110,17 @@ class UserDetail(models.Model):
     def __str__(self):
         return self.first_name
 
+class SurveyConfig(SingletonModel):
+    title = models.CharField(max_length=400,blank=True)
+    description = models.CharField(max_length=1000,blank=True)
 
+    def __str__(self) -> str:
+        return "Surver Title and Subtitle"
+    
+class Survey(models.Model):
+    survey_title = models.CharField(max_length=400,blank=True)
+    image = models.ImageField(upload_to='images/', validators=[FileExtensionValidator(['png','jpg','jpeg'])],blank=True, null=True)
+    url = models.URLField(blank=True)
 
-
+    def __str__(self):
+        return self.title

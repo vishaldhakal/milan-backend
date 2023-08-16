@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics, status
-from .models import ContactMe, AboutMe, SocialMediaLink, LogoImage, Image, Videos, Question, Answer, UserDetail
+from .models import ContactMe, AboutMe, SocialMediaLink, LogoImage, Image, Videos, Question, Answer, UserDetail,Survey,SurveyConfig
 from rest_framework.response import Response
-from .serializers import ContactMeSerializer, AboutMeSerializer, LogoImageSerializer, ImageSerializer, VideoSerializer, FindUsSerializer,  QuestionSerializer, AnswerCreateSerializer, AnswerListSerializer,UserDetailSerializer, UserDetailListSerializer
+from .serializers import ContactMeSerializer, AboutMeSerializer, LogoImageSerializer, ImageSerializer, VideoSerializer, FindUsSerializer,  QuestionSerializer, AnswerCreateSerializer, AnswerListSerializer,UserDetailSerializer, UserDetailListSerializer,SurveySerializer,SurveyConfigSerializer
 from blog.paginations import BlogAdminPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter,OrderingFilter
@@ -55,6 +55,80 @@ class AboutMeDeleteView(generics.DestroyAPIView):
     serializer_class = AboutMeSerializer
     permission_classes = [IsAdminUser]
     lookup_field = 'pk'
+
+class SurveyListView(generics.ListAPIView):
+    queryset = Survey.objects.all()
+    serializer_class = SurveySerializer
+
+
+class SurveyCreateView(generics.CreateAPIView):
+    queryset = Survey.objects.all()
+    serializer_class = SurveySerializer
+    permission_classes = [IsAdminUser]
+
+    def post(self, request, *args, **kwargs):
+
+        serializer = SurveySerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SurveyDetailView(generics.RetrieveAPIView):
+    queryset = Survey.objects.all()
+    serializer_class = SurveySerializer
+    permission_classes = [IsAdminUser]
+    lookup_field = 'pk'
+
+
+class SurveyUpdateView(generics.UpdateAPIView):
+    queryset = Survey.objects.all()
+    serializer_class = SurveySerializer
+    permission_classes = [IsAdminUser]
+    lookup_field = 'pk'
+
+
+class SurveyDeleteView(generics.DestroyAPIView):
+    queryset = Survey.objects.all()
+    serializer_class = SurveySerializer
+    permission_classes = [IsAdminUser]
+    lookup_field = 'pk'
+
+class SurveyConfigListView(generics.ListAPIView):
+    queryset = SurveyConfig.objects.get()
+    serializer_class = SurveyConfigSerializer
+
+
+class SurveyConfigCreateView(generics.CreateAPIView):
+    queryset = SurveyConfig.objects.get()
+    serializer_class = SurveyConfigSerializer
+    permission_classes = [IsAdminUser]
+
+    def post(self, request, *args, **kwargs):
+
+        serializer = SurveyConfigSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SurveyConfigDetailView(generics.RetrieveAPIView):
+    queryset = SurveyConfig.objects.get()
+    serializer_class = SurveyConfigSerializer
+    permission_classes = [IsAdminUser]
+
+
+class SurveyConfigUpdateView(generics.UpdateAPIView):
+    queryset = SurveyConfig.objects.get()
+    serializer_class = SurveyConfigSerializer
+    permission_classes = [IsAdminUser]
+
+
+
 
 class ContactMeListView(generics.ListAPIView):
     queryset = ContactMe.objects.all()

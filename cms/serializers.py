@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import AboutMe, ContactMe, SocialMediaLink, LogoImage, Image, Videos, Question, Answer, UserDetail
+from .models import AboutMe, ContactMe, SocialMediaLink, LogoImage, Image, Videos, Question, Answer, UserDetail,SurveyConfig,Survey
 
 class AboutMeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -60,7 +60,15 @@ class AnswerListSerializer(serializers.ModelSerializer):
         fields = ['id','question','answer','user_answer']
 
 
-    
+class SurveyConfigSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SurveyConfig
+        fields = '__all__'    
+
+class SurveySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Survey
+        fields = '__all__'    
 
 
         
