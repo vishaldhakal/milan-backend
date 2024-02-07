@@ -10,21 +10,21 @@ class Util:
     def send_mail_register(data):
         # smtpsetting = SMTPSetting.objects.last()
         backend = EmailBackend(port=587,
-                               host='smtp.gmail.com',
-                               username=settings.EMAIL_HOST_USERNAME,
-                               password=settings.EMAIL_HOST_PASSWORD,
+                               host='email-smtp.ap-southeast-2.amazonaws.com',
+                               username="AKIA5FTY75RTT2KJAW5Z",
+                               password="BPx5GcGETfUkzdJpwOwNuQUD43x34lW434EPdsgPrBlP",
                                fail_silently=False
                                )
         
-        email = EmailMessage(subject= data['email_subject'], body=data['email_body'], from_email= settings.EMAIL_HOST_USERNAME,to=[data['email_receiver']], connection=backend)
+        email = EmailMessage(subject= data['email_subject'], body=data['email_body'], from_email= 'milankatuwal333@gmail.com',to=[data['email_receiver']], connection=backend)
         email.send()
 
     @staticmethod
     def send_mail_admin(data):
         backend = EmailBackend(port=587,
-                               host='smtp.gmail.com',
-                               username=settings.EMAIL_HOST_USERNAME,
-                               password=settings.EMAIL_HOST_PASSWORD,
+                               host='email-smtp.ap-southeast-2.amazonaws.com',
+                               username="AKIA5FTY75RTT2KJAW5Z",
+                               password="BPx5GcGETfUkzdJpwOwNuQUD43x34lW434EPdsgPrBlP",
                                fail_silently=False
                                )
 
@@ -177,7 +177,7 @@ class Util:
   </body>
 </html>
         """.format(data['name'],data['user_email'], data['user_phone'], data['subject'], data['user_message'])
-        msg = EmailMultiAlternatives(subject =data['email_subject'],body =text_content,from_email =settings.EMAIL_HOST_USERNAME,to = [data['email_receiver']],connection=backend)
+        msg = EmailMultiAlternatives(subject =data['email_subject'],body =text_content,from_email ='milankatuwal333@gmail.com',to = [data['email_receiver']],connection=backend)
         msg.attach_alternative(text_content, "text/html")
         msg.send()
 
@@ -185,9 +185,9 @@ class Util:
     @staticmethod
     def send_mail_admin_for_answer(data):
         backend = EmailBackend(port=587,
-                               host='smtp.gmail.com',
-                               username=settings.EMAIL_HOST_USERNAME,
-                               password=settings.EMAIL_HOST_PASSWORD,
+                               host='email-smtp.ap-southeast-2.amazonaws.com',
+                               username="AKIA5FTY75RTT2KJAW5Z",
+                               password="BPx5GcGETfUkzdJpwOwNuQUD43x34lW434EPdsgPrBlP",
                                fail_silently=False
                                )
         text_content = """
@@ -351,6 +351,6 @@ class Util:
   </body>
 </html>
         """.format(data['first_name'],data['last_name'],data['user_email'],data['user_phone_number'],data['user_question'],data['user_answer'])
-        msg = EmailMultiAlternatives(subject =data['email_subject'],body =text_content,from_email =settings.EMAIL_HOST_USERNAME,to = [data['email_receiver']],connection=backend)
+        msg = EmailMultiAlternatives(subject =data['email_subject'],body =text_content,from_email ='milankatuwal333@gmail.com',to = [data['email_receiver']],connection=backend)
         msg.attach_alternative(text_content, "text/html")
         msg.send()
